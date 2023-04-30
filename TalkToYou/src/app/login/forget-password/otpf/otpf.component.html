@@ -1,0 +1,31 @@
+<div class="container d-flex align-items-center bd-highlight in" style="margin-top: 5%;">
+    <br>
+    <img src="favicon.ico" class="img-thumbline img" alt="Avtar" style="width: 40%;">
+    <div style="display: inline;" class="la">
+       <h2 style="display: inline;"> &nbsp;TalkToYou</h2>
+    </div>
+</div>
+<form class=" container border d-flex align-items-center bd-highlight" style="width:50%;margin-top: 0%"  (submit)="submit()">
+    <div class="container form-group  " >
+        <br>
+        <div class="container d-flex align-items-center justify-content-center">
+        <label>
+            OTP &nbsp;
+        </label>            
+        <input type="email"  class="form-control in" placeholder="OTP" name="otp"
+         [(ngModel)]="model.otp" value="{{model.otp}}" >
+        </div>
+        <br>
+        <div class="container d-flex align-items-center justify-content-center">
+            <small class="badge" style="color: rgb(243, 94, 94);">{{validation()}}</small>
+        </div>
+        <br>
+        <div class="container d-flex align-items-center justify-content-center">
+            <a  *ngIf="isDisabled()"
+            id="l1"><button class="btn btn-primary" type="submit" id="btn">Submit</button></a>
+            <a *ngIf="!isDisabled()"><button class="btn btn-primary" type="submit" id="btn">Submit</button></a>
+            <router-outlet></router-outlet>
+        </div>
+        <br>
+    </div>
+</form>

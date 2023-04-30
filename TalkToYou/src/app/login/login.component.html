@@ -1,0 +1,94 @@
+<div class="loading-screen-wrapper" *ngIf="loading">
+    <div class="loading-screen-icon">
+      Loading...
+    </div>
+  </div>
+<div class="container  d-flex align-items-center bd-highlight in" style="margin-top: 4%;">
+    <br>
+    <img src="favicon.ico" class="img-thumbline img" alt="Avtar" style="width: 40%;">
+    <div style="display: inline;" class="la">
+       <h2 style="display: inline;"> &nbsp;TalkToYou</h2>
+    </div>
+</div> 
+<form class=" container border d-flex align-items-center bd-highlight in" style=" width: 60%; opacity: 99%; margin-top: 0%; " (submit)="goToMain()" >
+    <div class="container form-group  ">
+        <br>
+          <div class="row">
+            <div class="col-md-8">
+                <div class="container form-group  ">
+                    <div *ngIf="type==1">
+                        <div class="container">
+                            <label>
+                                User Id &nbsp; &nbsp;
+                            </label>            
+                            <input type="text"  class="form-control in" style="display: inline;" placeholder="userid" name="email" [(ngModel)]="user" value="{{user}}">
+                            </div>
+                    </div>
+                    <div *ngIf="type==2">
+                        <div class="container">
+                            <label>
+                                Mobile Numebr &nbsp;
+                            </label>            
+                            <input type="text"  class="form-control in" style="display: inline;" placeholder="mobile number" name="email" [(ngModel)]="user" value="{{user}}">
+                            </div>
+                    </div>
+                    <div *ngIf="type==3">
+                        <div class="container">
+                            <label>
+                                Email Address &nbsp;
+                            </label>            
+                            <input type="email"  class="form-control in" style="display: inline;"  placeholder="email address" name="email" [(ngModel)]="user" value="{{user}}">
+                            </div>
+                            
+                    </div>
+                    
+                    <br>
+                    <div class="container">
+                        <label>
+                        Password &nbsp;
+                        </label>
+                        <input type="password"   class="container form-control in" style="display: inline;" placeholder="password" name="password" [(ngModel)]="password" value="{{password}}">
+                    </div>
+                    <a routerLink="./forgetPassword" class="d-flex align-items-center  justify-content-center">forget password</a>
+                    
+                    <div class="container d-flex align-items-center justify-content-center">
+                        <a  *ngIf="isDisabled()"
+                        id="l1"><button class="btn btn-primary" type="submit" id="btn">Submit</button></a>
+                        <a *ngIf="!isDisabled()"><button class="btn btn-primary" type="submit" id="btn">Submit</button></a>
+                        <router-outlet></router-outlet>
+                    </div>
+                </div>
+                <small style="color: rgb(243, 94, 94);" class=" d-flex align-items-center justify-content-center">
+                    {{warning}}
+                </small>
+            </div>
+            <div class="col-md-4">
+                <label>
+                    Select one to login
+                </label> 
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="idtype" checked (change)="change(1)" >
+                    <label class="form-check-label" for="userid">
+                      User Id
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input " type="radio" name="idtype" (change)="change(2)" >
+                    <label class="form-check-label" for="mobile">
+                      mobile number
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input " type="radio" name="idtype"   (change)="change(3)">
+                    <label class="form-check-label" for="email">
+                      email id
+                    </label>
+                </div>
+            </div>
+
+          </div>
+          <br>
+          <br>
+    
+    </div>
+</form>

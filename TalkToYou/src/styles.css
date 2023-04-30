@@ -1,0 +1,75 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~@ctrl/ngx-emoji-mart/picker';
+html{
+    background-color:white;
+}
+.in{
+        background-color:white;
+        color: rgb(12, 11, 11);
+        width:450px;
+}
+.in:focus{
+    background-color: white;
+    color: rgb(31, 29, 29);
+}
+.ba{
+    background-color: white;
+}
+
+a{
+    text-decoration: none;
+}
+.img{
+    border-radius: 50%;
+    height: 15%;
+    width: 15%;
+}
+.imgc{
+    border-radius: 50%;
+    height: 5%;
+    width: 5%;
+}
+.la{
+    color: rgb(31, 29, 29);
+}
+.bu{
+    background-color: white;
+    color: rgb(31, 29, 29);
+    border: none;
+    outline: none;
+}
+.bu:hover,.bu:focus{
+    outline: none;
+    border: none;
+}
+.bu:active{
+    outline: none;
+    border: none;
+}
+.bu:visited{
+    outline: none;
+    border: none;
+}
+.bu:hover::after{
+    border: none;
+}
+.msgr{
+    background-color: rgb(211, 73, 192);
+    color: white;
+    padding: 1%;
+    margin: 1%;
+    border-radius: 32vh;
+    margin: 10px 0 0;
+    padding: 9px 16px;
+}
+.msgs{
+    background-color: blue;
+    color: white;
+    padding: 1%;
+    margin: 1%;
+    border-radius: 32vh;
+    margin: 10px 0 0;
+    padding: 9px 16px;
+}
+
+

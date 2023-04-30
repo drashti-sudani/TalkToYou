@@ -1,0 +1,68 @@
+<a [routerLink]="['/main/Bio','true',id,'true']"><i class="bi bi-arrow-left la"></i></a>
+<div class="container in align-items-center" style="margin-top:0%">
+    <br>
+    <div *ngFor="let property of bio | keyvalue" class="text-centre">
+        <div *ngIf="property.key.substring(1).toLowerCase()=='avtar'">
+            <img [src]="property.value" class="img-thumbline img mx-auto d-block" alt="Avtar" style="margin-top:0%;">
+            <h4 style="text-align: center;"><button style="background-color: white;" (click)="open(content)"><i class="bi bi-camera-fill" style="text-align: center;font-weight: bolder; border-radius: 100%;" ></i></button></h4>
+        </div>
+        <div *ngIf="property.key.substring(1).toLowerCase()=='vtar'">
+            <img [src]="property.value" class="img-thumbline img mx-auto d-block" alt="Avtar" style="margin-top:0%;">
+            <h4 class=" align-items-center" style="vertical-align: centre;margin: 0px;"><button (click)="open(content)"><i class="bi bi-paperclip"></i></button></h4>
+        </div>
+        <div *ngIf="property.key.substring(1).toLowerCase()!='avtar'">
+            <div class="container ">
+            <label>
+                {{property.key.substring(1)}} &nbsp; &nbsp;
+            </label>            
+            <input type="text" *ngIf="property.key.charAt(0)=='2'" disabled class="form-control in"  placeholder="{{property.key.substring(1)}}" id="{{property.key.substring(1)}}" value="{{property.value}}" (keyup)="edit()">
+            <input type="text" *ngIf="property.key.charAt(0)!='2'" class="form-control in"  placeholder="{{property.key.substring(1)}}" id="{{property.key.substring(1)}}" value="{{property.value}}" (keyup)="edit()">
+            </div>
+            <br>
+        </div>
+    </div>
+    <div *ngIf="!edit()" class="container d-flex align-items-center justify-content-center">
+        <small class="badge" style="color: rgb(243, 94, 94);">{{warning}}</small>
+    </div>
+    <div class="container d-flex align-items-center justify-content-center">
+        <a *ngIf="edit()" >
+            <button type="submit" class="btn btn-primary" (click)="submit()">Submit</button>
+        </a>
+        <a *ngIf="!edit()">
+            <button type="submit" disabled class="btn btn-primary disabled">Submit</button>
+        </a>
+    </div>
+    
+</div>
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" 
+            id="modal-basic-title">
+            Selet Iamge
+        </h4>
+        <button type="button" class="close" id="close"
+                aria-label="Close" (click)=
+                "modal.dismiss('Cross click')">
+  
+            <span aria-hidden="true">
+                ×
+            </span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="form-group">
+                <label for="dateOfBirth">
+                    Image
+                </label>
+                <div class="input-group">
+                    <input class="form-control" type="file" accept="image/*" (change)="onChange($event)">
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button (click)="setAtar() "><i class="bi bi-send-fill"></i></button>
+    </div>
+</ng-template>

@@ -1,0 +1,21 @@
+<div class="loading-screen-wrapper" *ngIf="loading">
+    <div class="loading-screen-icon">
+      Loading...
+    </div>
+  </div>
+<a (click)="router()"><i class="bi bi-arrow-left la"></i></a>
+<div class="container in align-items-center" >
+    <br>
+    <div *ngFor="let property of bio | keyvalue" class="text-centre">
+        <div *ngIf="property.key.substring(1).toLowerCase()=='avtar'">
+            <img [src]="property.value" class="img-thumbline img mx-auto d-block" alt="Avtar" style="margin-top:2%;">
+        </div>
+        <div *ngIf="property.key.substring(1).toLowerCase()!='avtar'">
+        <p class="text-center" *ngIf="property.value.length!=0">{{property.key.substring(1)}} :  {{property.value}}</p>
+        </div>
+    </div>
+    <div *ngIf="edit" class="text-centre">
+        <a [routerLink]="['/editprofile',toString()]" class="mx-auto d-block"><button class="btn btn-primary mx-auto d-block">Edit prifile</button></a>
+    </div>
+    
+</div>

@@ -1,0 +1,128 @@
+<div class="loading-screen-wrapper" *ngIf="loading">
+    <div class="loading-screen-icon">
+      Loading...
+    </div>
+  </div>
+<div class="row" style="margin:0% 0px 0px 0px" (load)="load()">
+    <div class="col-sm-4" style="height: 100vh;  overflow-y: hidden; overflow-x: hidden;">
+        <div class="row">
+            <div class="col-sm-8">
+       <a [routerLink]="['/main/Bio','true',id,'true']" data-toggle="tooltip" data-placement="left" title="edit/view profile"> 
+        <div class="container" style="margin-top: 5%;">
+            <img [src]="imagesrc" class="img-thumbline img" alt="Avtar" style="width: 30%;height:30%">
+            <div style="display: inline;" class="la">
+                <p style="display: inline;"> &nbsp;{{id}}</p>
+            </div>
+            <!-- <i class="bi bi-person-plus la d-flex flex-row-reverse" style="width: 10%;height:10%"></i> -->
+        </div></a>
+        </div>
+        <div class="col-sm-4" >
+            <div class="d-flex flex-row-reverse" style="height:100%">
+                <a [routerLink]="['addcontacts']"><div class="p-2 mt-4"><h4><i class="bi bi-person-plus la" data-toggle="tooltip" title="add new contacts" style="width: 100%;height:100%;margin-top: 80px;"></i></h4></div></a>
+                <a [routerLink]="['/LogIn']"><div class="p-2 mt-4"><h4><i class="bi bi-power la " data-toggle="tooltip" title="LogOut" style="width: 100%;height:100%;margin-top: 80px;"></i></h4></div></a>
+            </div>
+        </div>
+        </div>
+        <hr class="la">
+        <nav class="navbar " style="width: 100%;">
+            <form class="form-inline" style="width: 100%;">
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search"  style="width: 80%;" name="search"
+                autocomplete="off" [(ngModel)]="searchText" [ngModelOptions]="{standalone: true}">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1" style="background-color: white;border-left: none; border-top-left-radius: 0%;border-bottom-left-radius: 0%;"><i class="bi bi-search"></i></span>
+                </div>
+              </div>
+            </form>
+          </nav>
+        <div style="overflow-y: scroll; height: 70%; width: 100%;" class="scoll-pane">
+            <div class="containe" >
+            <div *ngFor="let h of connection|filter:searchText">
+                <div class="container">
+                    <a [routerLink]="['/main/Bio','false',h.iid,'true']"><img [src]="h.aavtar" class="img-thumbline img" alt="Avtar" style="margin-top:2%;"></a>
+                    <div style="display: inline;" class="la">
+                        <button (click)="displayMsg(connection.indexOf(h))"  class="btn btn-outline bu"><p style="display: inline;"> &nbsp;{{h.iid}}</p></button>
+                    </div>
+                    <div style="display: inline;" *ngIf="h.Notification!=0">
+                        <span class="badge" style="background-color: black;">{{h.Notification}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    </div>
+    
+    <div class="border col-sm-8 " style="  overflow-y: none;" *ngIf="connection.length>0" >
+        <a [routerLink]="['/main/Bio','false',connection[index].iid,'true']"> <div class="container">
+            <br>
+            <img [src]="connection[index].aavtar" class="img-thumbline imgc" alt="Avtar" >
+            <div style="display: inline;" class="la">
+                <p style="display: inline;"> &nbsp;{{connection[index].iid}}</p>
+            </div>
+        </div></a>
+        <hr class="la">
+    <div >
+    <div class="container scoll-pane"  style="height: 75vh;   overflow-y: scroll;">
+    <div *ngFor="let h of chat[index];let i =index">
+        <div *ngIf="h.charAt(0)=='r'" class="la  d-flex flex-row" >
+            <p *ngIf="h.substring(1,5)==='http'" class="msgr"><a href="{{h.substring(1,h.indexOf(' '))}}" target=”_blank” style="color: inherit; text-decoration: inherit; ">{{h.substring(h.indexOf(' '))}}</a></p>
+            <p *ngIf="!(h.length>4 && h.substring(1,5)=== 'http')" class="msgr">{{h.substring(1)}}</p>
+            <h4  *ngIf="!(h.length>4 && h.substring(1,5)=== 'http')" style="vertical-align: centre;margin: 0px;"><button (click)="copy(h.substring(1))" data-toggle="tooltip" title="Click and traslate" ><i class="bi bi-translate"></i></button></h4>
+        </div>
+        
+        <div *ngIf="h.charAt(0)=='s'" class="la d-flex flex-row-reverse " >
+            <p *ngIf="h.substring(1,5)==='http'" class="msgs"><a href="{{h.substring(1,h.indexOf(' '))}}" target=”_blank” style="color: inherit; text-decoration: inherit; ">{{h.substring(h.indexOf(' '))}}</a></p>
+            <p *ngIf="!(h.length>4 && h.substring(1,5)=== 'http')" class="msgs">{{h.substring(1)}}</p>
+            <h4  *ngIf="!(h.length>4 && h.substring(1,5)=== 'http')" style="vertical-align: centre;margin: 0px;"><button (click)="copy(h.substring(1))" data-toggle="tooltip" title="Click and traslate" ><i class="bi bi-translate"></i></button></h4>
+        </div>
+    </div>
+    <emoji-mart  *ngIf="emoji" set='facebook' class="emoji-mart" title="Choose your emoji" (emojiSelect)="addEmoji($event)" [style]="{ position: 'absolute', bottom: '50px', right: '20px', width:'65%' }"></emoji-mart>
+    </div>
+    <div class="container align-bottom d-flex mt-auto mx-auto " >
+        <input class="form-control in" placeholder="Type message..." style="width: 90%;" [(ngModel)]="textArea">
+        <select class="form-control" name="language" id="languagesource" style="width: 15%;" data-toggle="tooltip" title="Source Language" >
+            <option *ngFor="let h of language;let i=index" value="{{h.substring(h.length-3)}}">{{h.substring(0,h.lastIndexOf(' '))}}</option>
+          </select>
+          <select class="form-control" name="language" id="languagetarget" style="width: 15%;" data-toggle="tooltip" title="Destination Language" >
+            <option *ngFor="let h of language" value="{{h.substring(h.length-3)}}">{{h.substring(0,h.lastIndexOf(' '))}}</option>
+          </select>
+          <h4 style="vertical-align: centre;margin: 0px;"><button (click)="traslate()" data-toggle="tooltip" title="Click and traslate" ><i class="bi bi-translate"></i></button></h4>  
+        <h4 style="vertical-align: centre;margin: 0px;"><button (click)="emojiV()"><i class="bi bi-emoji-laughing" ></i></button></h4>
+        <h4 style="vertical-align: centre;margin: 0px;"><button (click)="open(content)"><i class="bi bi-paperclip"></i></button></h4>
+        <h4 style="vertical-align: centre;margin: 0px;"><button (click)="send()"><i class="bi bi-send-fill"></i></button></h4>
+    </div>
+    </div>
+    </div>
+</div>
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" 
+            id="modal-basic-title">
+            Selet File
+        </h4>
+        <button type="button" class="close" id="close"
+                aria-label="Close" (click)=
+                "modal.dismiss('Cross click')">
+  
+            <span aria-hidden="true">
+                ×
+            </span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="form-group">
+                <label for="dateOfBirth">
+                    File
+                </label>
+                <div class="input-group">
+                    <input class="form-control" type="file" (change)="onChange($event)">
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button (click)="sendF() "><i class="bi bi-send-fill"></i></button>
+    </div>
+</ng-template>

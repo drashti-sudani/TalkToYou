@@ -1,0 +1,54 @@
+<div class="loading-screen-wrapper" *ngIf="loading">
+    <div class="loading-screen-icon">
+      Loading...
+    </div>
+  </div>
+<div class="container  d-flex align-items-center bd-highlight in" style="margin-top: 4%;">
+    <br>
+    <img src="favicon.ico" class="img-thumbline img" alt="Avtar" style="width: 40%;">
+    <div style="display: inline;" class="la">
+        <h2 style="display: inline;"> &nbsp;TalkToYou</h2>
+    </div>
+</div>
+<form class=" container border d-flex align-items-center bd-highlight in" style=" width: 50%; opacity: 99%; margin-top: 0%; "  >
+    <div class="container form-group center-block ">
+        <br>
+        <div class="container d-flex align-items-center justify-content-center">
+        <label >
+            Email Address &nbsp;&nbsp;&nbsp; &nbsp;
+        </label>            
+        <input type="email"  class="form-control in"  placeholder="email address" name="email" [(ngModel)]="model.email" value="{{model.email}}">
+        
+        </div>
+        <div class="container d-flex align-items-center justify-content-center" >
+            <label  class="label label-default">
+                OR
+            </label>
+        </div>
+        <div class="container d-flex align-items-center justify-content-center">
+        <label>
+            Mobaile Number &nbsp;
+        </label>
+        <input type="text"   class=" form-control in" placeholder="mobile number" ng2TelInput
+        [ng2TelInputOptions]="{initialCountry: 'in'}" name="number" [(ngModel)]="model.number" value="{{model.number}}">
+        </div>
+        <div class="d-flex align-items-center justify-content-center">
+            <small class="badge" style="color: rgb(243, 94, 94);">{{validation()}}</small>
+        </div>
+        <br>
+        <div class="container d-flex align-items-center justify-content-center">
+            <a [routerLink]="[link]" *ngIf="isDisabled()"
+            id="l1"><button class="btn btn-primary" type="submit" id="btn" (click)="submit()">Send OTP</button></a>
+            <a *ngIf="!isDisabled()"><button class="btn btn-primary" type="submit" id="btn">Send OTP</button></a>
+            <router-outlet></router-outlet>
+        </div>
+        
+
+        <small class="d-flex align-items-center justify-content-centerd-flex align-items-center justify-content-center">
+            Already have account?<a routerLink="./LogIn">LogIn</a>
+        </small>
+        <br>
+        <br>
+    </div>
+</form>
+

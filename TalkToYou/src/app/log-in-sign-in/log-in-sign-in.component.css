@@ -1,0 +1,15 @@
+.loading-screen-wrapper {
+  z-index: 10;
+   position: absolute; 
+  background-color: rgba(255, 255, 255, 0.6);
+  width: 80%;
+  height: 80%;
+  display: block;
+}
+
+.loading-screen-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
