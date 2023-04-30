@@ -25,7 +25,7 @@ public class SmsController {
 				for(int i=0;i<6;i++) {
 					a+=(int)(Math.random()*(9)+1);
 				}
-                Twilio.init("AC08ce2dad05f624b8698417788618e611", "750dc2c367a6bbc8cb3b9958a791bed4");
+                Twilio.init("****************************", "*******************");
 
                 Message.creator(new PhoneNumber(s),
                                 new PhoneNumber("+18315766009"), "OTP for TALKTOYOU Application : "+a).create();
